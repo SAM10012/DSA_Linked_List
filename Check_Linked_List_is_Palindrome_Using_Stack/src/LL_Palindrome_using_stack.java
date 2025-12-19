@@ -43,33 +43,19 @@ The list may contain an even or odd number of nodes
 
 */
 
-//========================== Approach 2 : Using Reverse Second Half of List ======================================
+//========================== Approach 1 : Using Stack ======================================
 
-/*
-Time Complexity (TC)
+/* Time & Space Complexity
+Metric	Complexity
+Time	O(n)
+Space	O(n/2) → O(n)
 
-        O(n)
-
-        One pass to find the middle
-
-        One pass to reverse the second half
-
-        One pass to compare both halves
-
-        All are linear → O(n)
-
-        💾 Space Complexity (SC)
-
-        O(1)
-
-        No extra data structures used
-
-        Reversal is done in-place
+(Optimized stack-based solution)
 
 */
 
 import java.util.*;
-public class Palindrome_Linked_List {
+public class LL_Palindrome_using_stack {
 
     public static class Node{
         int val;
@@ -84,8 +70,11 @@ public class Palindrome_Linked_List {
 
     public static boolean isPalindrome(Node head)
     {
-        Node fast = head;
+        if (head == null || head.next == null)
+            return true;
+
         Node slow = head;
+        Node fast = head;
 
         while(fast != null && fast.next != null)
         {
@@ -94,29 +83,21 @@ public class Palindrome_Linked_List {
         }
 
         if(fast != null)
+            slow = slow.next;
+
+        Stack<Integer> s1 = new Stack<>();
+
+        while(slow != null)
         {
+            s1.push(slow.val);
             slow = slow.next;
         }
 
-        Node curr = slow;
-        Node prev = null;
-        Node next = null;
-
-        while(curr != null)
+        while(!s1.isEmpty())
         {
-            next = curr.next;
-            curr.next = prev;
-            prev = curr;
-            curr = next;
-        }
-
-        while(prev != null)
-        {
-            if(head.val != prev.val)
+            if(head.val != s1.pop())
                 return false;
-
             head = head.next;
-            prev = prev.next;
         }
 
         return true;
