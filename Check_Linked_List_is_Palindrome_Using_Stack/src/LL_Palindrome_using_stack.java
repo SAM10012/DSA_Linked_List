@@ -43,7 +43,7 @@ The list may contain an even or odd number of nodes
 
 */
 
-//========================== Approach 1 : Using Stack ======================================
+//=============================== Approach 1 : Using Stack ======================================
 
 /* Time & Space Complexity
 Metric	Complexity
